@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.OptionalInt;
 
 /**
  * 
@@ -22,24 +23,28 @@ public class EvalExecutor extends AbstractExecutor {
 	
 	public static void main(String[] args){
 		
-		
 		/*Optional<EvalTypeEnum> evalType = Optional.ofNullable(EvalTypeEnum.convertFrom(Optional.ofNullable(args)
 				                                                                               .orElseThrow(() -> error())[0]));*/
 		
 		
-		Optional.ofNullable(args).orElseThrow(() -> error()).length == 2 ? 
-		
-		
 		EvalTypeEnum evalType = null;
 		int threadCount = 0;
+		Optional<String[]> argsOpt = Optional.ofNullable(args);
 		
-        
-	    Arrays.stream(Optional.ofNullable(args).orElseThrow(() -> error()))
-	          .
-       
+		if((args = argsOpt.orElseThrow(() -> error())).length == 2){
+			
+			evalType = Optional.ofNullable(EvalTypeEnum.convertFrom(args[0])).orElseThrow(() -> error());
+			threadCount = Optional.ofNullable(Integer.valueOf(args[1])).orElseThrow(() -> error()).intValue();
+			
+		}else{
+			
+			throw error();
+			
+		}
 		
 		
-		switch(evalType.orElseThrow(() -> error())){
+		
+		switch(evalType){
 		
 		    case CPU:
 			    break;
