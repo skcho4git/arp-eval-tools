@@ -31,6 +31,7 @@ public class EvalExecutor extends AbstractExecutor {
 		int threadCount = 0;
 		Optional<String[]> argsOpt = Optional.ofNullable(args);
 		
+		
 		if((args = argsOpt.orElseThrow(() -> error())).length == 2){
 			
 			evalType = Optional.ofNullable(EvalTypeEnum.convertFrom(args[0])).orElseThrow(() -> error());
