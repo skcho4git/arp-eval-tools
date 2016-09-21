@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-3.1.xsd">
+
+	<context:property-placeholder location="classpath:/merchant-tools.properties" />
+
+	<util:properties id="properties"
+		location="classpath:/merchant-tools.properties" />
+
+	<bean id="resourceClient"
+		class="com.rakuten.gep.merchant.api.client.impl.ResourceClientImpl"
+		abstract="true">
+		<!-- <property name="baseUri" value="${merchantapi.base.uri}" /> -->
+		<property name="name" value="${merchantapi.name}" />
+		<property name="threadPoolCount" value="${merchantapi.thread.pool.count}" />
+		<property name="timeOut" value="${merchantapi.time.out}" />
+	</bean>
+
+	<bean id="merchantResourceClient"
+		class="com.rakuten.gep.merchant.api.client.impl.MerchantResourceClientImpl"
+		parent="resourceClient" init-method="init" />
+	<bean id="shopResourceClient"
+		class="com.rakuten.gep.merchant.api.client.impl.ShopResourceClientImpl"
+		parent="resourceClient" init-method="init" />
+	<bean id="shippingResourceClient"
+		class="com.rakuten.gep.merchant.api.client.impl.ShippingResourceClientImpl"
+		parent="resourceClient" init-method="init" />
+	<bean id="paymentResourceClient"
+		class="com.rakuten.gep.merchant.api.client.impl.PaymentResourceClientImpl"
+		parent="resourceClient" init-method="init" />
+
+</beans>
+    
