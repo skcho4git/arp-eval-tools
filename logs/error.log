@@ -1,0 +1,46 @@
+2016-09-22 16:00:30,821 ERROR [main] [EvalExecutor.java:198] - {EvalExecutor failed to execute}
+java.lang.IllegalStateException: Usage: eval.sh (cpu|memory|read|write|network) (${#thread})
+	at com.rakuten.arp.eval.entrypoint.EvalExecutor.error(EvalExecutor.java:219)
+	at com.rakuten.arp.eval.entrypoint.EvalExecutor.execute(EvalExecutor.java:156)
+	at com.rakuten.arp.eval.entrypoint.EvalExecutor.main(EvalExecutor.java:137)
+2016-09-22 16:01:23,059 ERROR [main] [EvalExecutor.java:198] - {EvalExecutor failed to execute}
+java.lang.NumberFormatException: For input string: "hoge"
+	at java.lang.NumberFormatException.forInputString(NumberFormatException.java:65)
+	at java.lang.Integer.parseInt(Integer.java:580)
+	at java.lang.Integer.valueOf(Integer.java:766)
+	at com.rakuten.arp.eval.entrypoint.EvalExecutor.lambda$4(EvalExecutor.java:167)
+	at java.util.Optional.map(Optional.java:215)
+	at com.rakuten.arp.eval.entrypoint.EvalExecutor.execute(EvalExecutor.java:167)
+	at com.rakuten.arp.eval.entrypoint.EvalExecutor.main(EvalExecutor.java:137)
+2016-09-22 16:01:54,596 ERROR [main] [EvalExecutor.java:198] - {EvalExecutor failed to execute}
+java.lang.IllegalStateException: Usage: eval.sh (cpu|memory|read|write|network) (${#thread})
+	at com.rakuten.arp.eval.entrypoint.EvalExecutor.error(EvalExecutor.java:219)
+	at com.rakuten.arp.eval.entrypoint.EvalExecutor.lambda$3(EvalExecutor.java:163)
+	at java.util.Optional.orElseThrow(Optional.java:290)
+	at com.rakuten.arp.eval.entrypoint.EvalExecutor.execute(EvalExecutor.java:163)
+	at com.rakuten.arp.eval.entrypoint.EvalExecutor.main(EvalExecutor.java:137)
+2016-09-22 16:03:16,902 ERROR [main] [EvalExecutor.java:198] - {EvalExecutor failed to execute}
+org.springframework.beans.factory.NoSuchBeanDefinitionException: No bean named 'netoworkEvaluator' is defined
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.getBeanDefinition(DefaultListableBeanFactory.java:677)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getMergedLocalBeanDefinition(AbstractBeanFactory.java:1180)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:284)
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:197)
+	at org.springframework.context.support.AbstractApplicationContext.getBean(AbstractApplicationContext.java:1076)
+	at com.rakuten.arp.eval.entrypoint.EvalExecutor.init(EvalExecutor.java:213)
+	at com.rakuten.arp.eval.entrypoint.EvalExecutor.execute(EvalExecutor.java:172)
+	at com.rakuten.arp.eval.entrypoint.EvalExecutor.main(EvalExecutor.java:137)
+2016-09-22 17:08:21,039 ERROR [main] [EvalExecutor.java:198] - {EvalExecutor failed to execute}
+java.lang.ClassCastException: [Ljava.lang.Object; cannot be cast to [Ljava.util.concurrent.CompletableFuture;
+	at com.rakuten.arp.eval.impl.CPUEvaluator.invoke(CPUEvaluator.java:31)
+	at com.rakuten.arp.eval.entrypoint.EvalExecutor.execute(EvalExecutor.java:178)
+	at com.rakuten.arp.eval.entrypoint.EvalExecutor.main(EvalExecutor.java:137)
+2016-09-22 17:08:48,859 ERROR [main] [EvalExecutor.java:198] - {EvalExecutor failed to execute}
+java.lang.ClassCastException: [Ljava.lang.Object; cannot be cast to [Ljava.util.concurrent.CompletableFuture;
+	at com.rakuten.arp.eval.impl.CPUEvaluator.invoke(CPUEvaluator.java:34)
+	at com.rakuten.arp.eval.entrypoint.EvalExecutor.execute(EvalExecutor.java:178)
+	at com.rakuten.arp.eval.entrypoint.EvalExecutor.main(EvalExecutor.java:137)
+2016-09-22 17:14:03,630 ERROR [main] [EvalExecutor.java:198] - {EvalExecutor failed to execute}
+java.lang.ClassCastException: [Ljava.lang.Object; cannot be cast to [Ljava.util.concurrent.CompletableFuture;
+	at com.rakuten.arp.eval.impl.CPUEvaluator.invoke(CPUEvaluator.java:34)
+	at com.rakuten.arp.eval.entrypoint.EvalExecutor.execute(EvalExecutor.java:178)
+	at com.rakuten.arp.eval.entrypoint.EvalExecutor.main(EvalExecutor.java:137)

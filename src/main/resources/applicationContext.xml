@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+       http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+
+    <!-- 
+	<context:property-placeholder location="classpath:/merchant-tools.properties" />
+
+	<util:properties id="properties"
+		location="classpath:/merchant-tools.properties" />
+    -->
+    <bean id="cpuEvaluator" class="com.rakuten.arp.eval.impl.CPUEvaluator" init-method="init" />
+    <bean id="memoryEvaluator" class="com.rakuten.arp.eval.impl.MemoryEvaluator" init-method="init" />
+    <bean id="readEvaluator" class="com.rakuten.arp.eval.impl.ReadEvaluator" init-method="init" />
+    <bean id="writeEvaluator" class="com.rakuten.arp.eval.impl.WriteEvaluator" init-method="init" />
+    <bean id="networkEvaluator" class="com.rakuten.arp.eval.impl.NetworkEvaluator" init-method="init" />
+
+
+</beans>
+    
