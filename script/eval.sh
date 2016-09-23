@@ -2,7 +2,10 @@
 
 export LANG=ja_JP.UTF-8
 
-BASE_DIR="."
+BASE_DIR=$(dirname $0)
+HEAP_SIZE=$1
+
+shift
 
 #JAVA_HOME
 if [ -z $JAVA_HOME ]; then
@@ -22,4 +25,4 @@ export BASE_DIR
 export JAVA_PATH
 export CLASSPATH
 
-$JAVA_PATH -classpath $CLASSPATH -Xms512m -Xmx512m com.rakuten.arp.eval.EvalExecutor "$@"
+$JAVA_PATH -classpath $CLASSPATH -Xms${HEAP_SIZE} -Xmx${HEAP_SIZE} com.rakuten.arp.eval.entrypoint.EvalExecutor "$@"
