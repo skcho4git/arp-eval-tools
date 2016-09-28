@@ -24,16 +24,25 @@ public class CPUEvaluator implements Evaluator {
 		final long start = System.currentTimeMillis();		
 		
 		CompletableFuture<Void>[] futureArray = new CompletableFuture[threadCount];
-		ExecutorService executor = Executors.newFixedThreadPool(threadCount);
+		//ExecutorService executor = Executors.newFixedThreadPool(threadCount);
+		
+		List<ExecutorService> executorList = new ArrayList<>(threadCount);
+		ExecutorService executor = null;
 		
 		for(int i = 0 ; i < threadCount ; i++){			
 			
-			futureArray[i] = CompletableFuture.runAsync(() -> calcMandelbrot(),executor);
+			futureArray[i] = CompletableFuture.runAsync(() -> calcMandelbrot(),(executor = Executors.newSingleThreadExecutor()));
+			executorList.add(executor);
 		}		
 				
 		CompletableFuture.allOf(futureArray)
 		                 .thenRun(() -> System.out.println("Elapsed Time: " + (System.currentTimeMillis() - start) + "ms"))
-		                 .thenRun(() -> executor.shutdown());
+		                 .thenRun(() -> {
+		                	 
+		                	 executorList.stream()
+		                	             .forEach(ExecutorService::shutdown);
+		                	 
+		                 });
 	    	
 		
 	}
@@ -68,7 +77,7 @@ public class CPUEvaluator implements Evaluator {
 	       }
 	       
 	       long end = System.currentTimeMillis();	       
-	       System.out.println(Thread.currentThread().getId() + ": Time: " + (end - start) + "ms");		
+	       System.out.println(Thread.currentThread().getId() + "," + (end - start) + "ms");		
 		
 		
 	}
