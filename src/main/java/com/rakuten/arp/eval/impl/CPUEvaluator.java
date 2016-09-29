@@ -1,6 +1,7 @@
 package com.rakuten.arp.eval.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.Executor;
@@ -19,30 +20,51 @@ public class CPUEvaluator implements Evaluator {
 
 	@Override
 	@SuppressWarnings("unchecked")
-	public void invoke(final int threadCount){		
+	public void invoke(final int threadCount){	
 		
-		final long start = System.currentTimeMillis();		
+				
 		
 		CompletableFuture<Void>[] futureArray = new CompletableFuture[threadCount];
 		//ExecutorService executor = Executors.newFixedThreadPool(threadCount);
 		
-		List<ExecutorService> executorList = new ArrayList<>(threadCount);
-		ExecutorService executor = null;
+		List<ExecutorService> executorList = new ArrayList<>(threadCount);		
+		//ExecutorService executor = null;
+		
+		ExecutorService[] executorArray = new ExecutorService[threadCount];
+		
+		for(int i = 0 ; i < threadCount; i++){
+			
+			executorArray[i] = Executors.newSingleThreadExecutor();			
+			
+		}
+		
+		final long start = System.currentTimeMillis();
 		
 		for(int i = 0 ; i < threadCount ; i++){			
 			
-			futureArray[i] = CompletableFuture.runAsync(() -> calcMandelbrot(),(executor = Executors.newSingleThreadExecutor()));
-			executorList.add(executor);
+			/*futureArray[i] = CompletableFuture.runAsync(() -> calcMandelbrot(),(executor = Executors.newSingleThreadExecutor()));
+			executorList.add(executor);*/
+			
+			futureArray[i] = CompletableFuture.runAsync(() -> calcMandelbrot(),executorArray[i]);
+			//futureArray[i] = CompletableFuture.runAsync(() -> calcMandelbrot());
 		}		
 				
 		CompletableFuture.allOf(futureArray)
 		                 .thenRun(() -> System.out.println("Elapsed Time: " + (System.currentTimeMillis() - start) + "ms"))
 		                 .thenRun(() -> {
 		                	 
-		                	 executorList.stream()
-		                	             .forEach(ExecutorService::shutdown);
+		                	 /*executorList.stream()
+		                	             .forEach(ExecutorService::shutdown);*/
+		                	 
+		                	 Arrays.stream(executorArray)
+		                	       .forEach(ExecutorService::shutdown);		                	 
+		                	 
 		                	 
 		                 });
+		
+		/*CompletableFuture.allOf(futureArray)
+                         .thenRun(() -> System.out.println("Elapsed Time: " + (System.currentTimeMillis() - start) + "ms"));*/
+        
 	    	
 		
 	}
